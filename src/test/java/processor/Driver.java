@@ -19,7 +19,8 @@ public class Driver {
     static String platformName;
     static String platformVersion;
     static String avdName;
-    static String pathToApp = "/Users/administrator/Downloads/app-dev-debug.apk";
+    static String pathToApp = "/Users/macbook/Downloads/xtr-XamarinCRMiOS.app";
+    //static String pathToApp = "/Users/macbook/Downloads/app-dev-debug.apk";
     private static AppiumDriver driver;
     String command;
     CommandLineExecutor commandLineExecutor = new CommandLineExecutor();
@@ -33,12 +34,15 @@ public class Driver {
         platformName = platform_name;
         platformVersion = platform_version;
         avdName = avd_name;
-        command = "appium -a 127.0.0.1";
-
-        /*command = "appium -a 127.0.0.1 --automation-name Appium --platform-name " + platformName +
-                " --platform-version " + platformVersion + " --app " + pathToApp + " --avd " + avdName +
-                " --device-name " + avdName + " --full-reset";
-*/        commandLineExecutor.executeCommand(command, "Appium REST http interface listener started");
+        if (platformName.equals("Android"))
+        command = "appium -a 127.0.0.1 -p 4723 --automation-name Appium --platform-name " + platformName +
+                " --platform-version " + platformVersion + " --app " + pathToApp +
+                " --avd " + avdName + " --device-name \"" + avdName + "\" --full-reset";
+        else
+            command = "appium -a 127.0.0.1 --platform-version \"" + platformVersion +
+                    "\" --platform-name \"" + platformName + "\" --app \"" + pathToApp +
+                    "\" --udid \"\"" + " --device-name \"" + avdName + "\"";
+        commandLineExecutor.executeCommand(command, "Appium REST http interface listener started");
     }
 
     public static AppiumDriver getDriver() throws MalformedURLException, InterruptedException {
@@ -62,6 +66,9 @@ public class Driver {
     @AfterSuite
     public void closeAppiumServer() {
         command = "killall node";
+        commandLineExecutor.executeCommand(command, "");
+        if (platformName.equals("Android")) command = "adb emu kill"; else
+        command = "killall Simulator";
         commandLineExecutor.executeCommand(command, "");
     }
 

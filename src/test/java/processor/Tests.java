@@ -19,11 +19,8 @@ public class Tests {
     @Test(description = "регистрация демо счета")
     @Parameters({"is_real"})
     public void regAccount(String is_real) throws MalformedURLException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-
         isRealAccount = Boolean.getBoolean(is_real);
-
-        IMainPage page = (IMainPage) this.getPage("IMainPage");
-
+        IMainPage page = (IMainPage) this.getPage("MainPage");
         page.clickOpenAccount(isRealAccount);
     }
 
