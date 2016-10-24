@@ -24,7 +24,7 @@
                 <version>2.19.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/appium.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/temp.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

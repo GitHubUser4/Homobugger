@@ -1,5 +1,6 @@
 package pages;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import processor.Driver;
@@ -11,7 +12,7 @@ import java.net.MalformedURLException;
  */
 public abstract class PageAbstract {
 
-    public AndroidDriver getDriver() throws MalformedURLException, InterruptedException {
+    public AppiumDriver getDriver() throws MalformedURLException, InterruptedException {
         return Driver.getDriver();
     }
 

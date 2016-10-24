@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="Android_5.x" verbose="10">
+    <parameter name="platform_name" value="Android"/>
+    <parameter name="platform_version" value="5.0.1"/>
+    <parameter name="avd_name" value="Android_5.x"/>
+
+    <test name="RegDemoAccount">
+        <parameter name="is_real" value="false"/>
+        <classes>
+            <class name="processor.Driver"/>
+            <class name="processor.Tests">
+                <methods>
+                    <include name ="regDemo"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

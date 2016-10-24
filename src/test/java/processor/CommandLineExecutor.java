@@ -11,7 +11,8 @@ public class CommandLineExecutor {
     public void executeCommand(String command, String startMessage) {
         Process process;
         try {
-            process = Runtime.getRuntime().exec("appium -a 127.0.0.1 --automation-name Appium --platform-name Android --platform-version 5.0.1 --app /Users/macbook/Downloads/app-dev-debug.apk --avd Android_5.x --device-name Android_5.x --full-reset");
+            System.out.println(command);
+            process = Runtime.getRuntime().exec(command);
             //String[] strings = new String[] {"/bin/bash", "-c", command};
             //process = new ProcessBuilder("appium", "-a 127.0.0.1","-p 4725").start();
             if (!startMessage.equals("")) {
