@@ -25,6 +25,10 @@ public class MainPage extends PageAbstract implements IMainPage {
         this.getDriver().findElement(By.id("registration_next_button")).click();
     }
 
+    @Override
+    public void changePassword(String password, String passwordConformation) throws MalformedURLException, InterruptedException {
+
+    }
 
 
 }

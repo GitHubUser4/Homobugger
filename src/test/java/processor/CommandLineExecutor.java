@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
  * Created by macbook on 14.10.16.
  */
 public class CommandLineExecutor {
+    String value;
 
     public void executeCommand(String command, String startMessage) {
         Process process;
@@ -18,7 +19,10 @@ public class CommandLineExecutor {
             if (!startMessage.equals("")) {
                 BufferedReader reader =
                         new BufferedReader(new InputStreamReader(process.getInputStream()));
-                while (!reader.readLine().contains(startMessage)) {
+                value = reader.readLine();
+                while (!value.contains(startMessage)) {
+                    System.out.println(value);
+                    value = reader.readLine();
                 }
             }
 

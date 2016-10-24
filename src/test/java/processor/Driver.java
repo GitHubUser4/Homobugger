@@ -33,12 +33,11 @@ public class Driver {
         platformName = platform_name;
         platformVersion = platform_version;
         avdName = avd_name;
-        command = "appium -a 127.0.0.1";
 
-        /*command = "appium -a 127.0.0.1 --automation-name Appium --platform-name " + platformName +
+        command = "appium -a 127.0.0.1 --automation-name Appium --platform-name " + platformName +
                 " --platform-version " + platformVersion + " --app " + pathToApp + " --avd " + avdName +
                 " --device-name " + avdName + " --full-reset";
-*/        commandLineExecutor.executeCommand(command, "Appium REST http interface listener started");
+        commandLineExecutor.executeCommand(command, "Appium REST http interface listener started");
     }
 
     public static AppiumDriver getDriver() throws MalformedURLException, InterruptedException {
@@ -46,6 +45,7 @@ public class Driver {
         if (driver == null) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("language", "en");
+            System.out.println(platformName);
             if (platformName.equals("Android")) {
                 driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 

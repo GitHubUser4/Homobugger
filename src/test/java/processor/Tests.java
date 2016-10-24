@@ -21,16 +21,17 @@ public class Tests {
     public void regAccount(String is_real) throws MalformedURLException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         isRealAccount = Boolean.getBoolean(is_real);
-
-        IMainPage page = (IMainPage) this.getPage("IMainPage");
-
+        IMainPage page = (IMainPage) this.getPage("MainPage");
         page.clickOpenAccount(isRealAccount);
+        page.fillRegData("Vasya", "pupko@mailinator.com");
+        page.changePassword("Qwerty123", "Qwerty123");
     }
 
     @Test(description = "вход в кабинет")
     public void regRa() {
 
     }
+
 
     private Object getPage(String name) throws MalformedURLException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String type;
