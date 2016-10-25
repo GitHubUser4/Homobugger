@@ -34,6 +34,8 @@ public class MainPage extends PageAbstract implements IMainPage {
         this.getDriver().hideKeyboard();
         this.getDriver().findElement(By.id("change_pass_next_button")).click();
 
+
+
     }
 
 

@@ -12,8 +12,9 @@ import java.net.MalformedURLException;
 public class MainPage extends PageAbstract implements IMainPage {
 
     public void clickOpenAccount(boolean isReal) throws MalformedURLException, InterruptedException {
-        if (isReal) this.getDriver().findElement(By.id("Open Real account")).click(); else
-        this.getDriver().findElement(By.id("Demo account with $1,000")).click();
+        //if (isReal) this.getDriver().findElement(By.id("Open Real account")).click(); else
+        //this.getDriver().findElement(By.id("Demo account with $1,000")).click();
+        Thread.sleep(10000);
     }
 
     public void fillRegData(String userName, String userEmail) throws MalformedURLException, InterruptedException {
