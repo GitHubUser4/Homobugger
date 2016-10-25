@@ -3,8 +3,6 @@ package processor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.ScreenOrientation;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 
@@ -16,14 +14,39 @@ import java.util.concurrent.TimeUnit;
  * Created by macbook on 14.10.16.
  */
 public class Driver {
+    static boolean debugMode = false;
     static String platformName;
     static String platformVersion;
     static String avdName;
-    static String pathToApp = "/Users/macbook/Downloads/xtr-XamarinCRMiOS.app";
-    //static String pathToApp = "/Users/macbook/Downloads/app-dev-debug.apk";
+    static String pathToApp = "/Users/administrator/Downloads/hotoption.app";
+    //static String pathToApp = "/Users/administrator/Downloads/app-dev-debug.apk";
     private static AppiumDriver driver;
     String command;
     CommandLineExecutor commandLineExecutor = new CommandLineExecutor();
+
+    public static AppiumDriver getDriver() throws MalformedURLException, InterruptedException {
+
+        if (driver == null) {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("language", "en");
+            if (platformName.equals("Android")) {
+                driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+
+            } else if (platformName.equals("iOS")) {
+                capabilities.setCapability("platformVersion", platformVersion);
+                capabilities.setCapability("platformName", platformName);
+                capabilities.setCapability("app", pathToApp);
+                capabilities.setCapability("udid", "");
+                capabilities.setCapability("deviceName", avdName);
+                capabilities.setCapability("fullReset", "true");
+                capabilities.setCapability("newCommandTimeout", 7200);
+                capabilities.setCapability("automationName", "Appium");
+                driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+            }
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        }
+        return driver;
+    }
 
     @BeforeSuite //перед каждыйм набором тестов
     @Parameters({"platform_name", "platform_version", "avd_name"})
@@ -35,33 +58,14 @@ public class Driver {
         platformVersion = platform_version;
         avdName = avd_name;
         if (platformName.equals("Android"))
-        command = "appium -a 127.0.0.1 -p 4723 --automation-name Appium --platform-name " + platformName +
-                " --platform-version " + platformVersion + " --app " + pathToApp +
-                " --avd " + avdName + " --device-name \"" + avdName + "\" --full-reset";
+            command = "appium -a 127.0.0.1 -p 4723 --automation-name Appium --platform-name " + platformName +
+                    " --platform-version " + platformVersion + " --app " + pathToApp +
+                    " --avd " + avdName + " --device-name \"" + avdName + "\" --full-reset";
         else
-            command = "appium -a 127.0.0.1 --platform-version \"" + platformVersion +
-                    "\" --platform-name \"" + platformName + "\" --app \"" + pathToApp +
-                    "\" --udid \"\"" + " --device-name \"" + avdName + "\"";
+            command = "appium -a 127.0.0.1 -p 4723";
+        if (debugMode) command = command + " --log /tmp/appium_new.log --log-level debug";
         commandLineExecutor.executeCommand(command, "Appium REST http interface listener started");
     }
-
-    public static AppiumDriver getDriver() throws MalformedURLException, InterruptedException {
-
-        if (driver == null) {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("language", "en");
-            if (platformName.equals("Android")) {
-                driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-
-            } else if (platformName.equals("iOS")) {
-                driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-            }
-            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        }
-        return driver;
-    }
-
-
 
     @AfterSuite
     public void closeAppiumServer() {

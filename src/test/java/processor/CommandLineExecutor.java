@@ -16,7 +16,6 @@ public class CommandLineExecutor {
             process = Runtime.getRuntime().exec(command);
             //String[] strings = new String[] {"/bin/bash", "-c", command};
             //process = new ProcessBuilder("appium", "-a 127.0.0.1","-p 4725").start();
-            Thread.sleep(5000);
             if (!startMessage.equals("")) {
                 BufferedReader reader =
                         new BufferedReader(new InputStreamReader(process.getInputStream()));
