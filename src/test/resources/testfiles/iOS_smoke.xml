@@ -3,6 +3,7 @@
     <parameter name="platform_name" value="iOS"/>
     <parameter name="platform_version" value="9.3"/>
     <parameter name="avd_name" value="iPhone 6"/>
+    <parameter name="path_to_app" value="/Users/administrator/Downloads/hotoption.app"/>
 
     <test name="RegDemoAccount">
         <parameter name="is_real" value="false"/>

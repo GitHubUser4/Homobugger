@@ -4,35 +4,48 @@ import io.appium.java_client.android.AndroidDriver;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.IMainPage;
-
-import java.net.MalformedURLException;
+import pages.ITradePage;
 
 /**
  * Created by Popov S. on 14.10.16.
  */
 public class Tests {
-    String userName;
+    private String userName;
     private ErrorProcessor errorProcessor = new ErrorProcessor();
     private Boolean isRealAccount;
+    private IMainPage mainPage;
+    private ITradePage tradePage;
 
+    public Tests() throws InterruptedException {
+        mainPage = (IMainPage) this.getPage("MainPage");
+        tradePage = (ITradePage) this.getPage("TradePage");
+    }
 
     @Test(description = "регистрация нового счета")
     @Parameters({"is_real"})
     public void regAccount(String is_real) throws InterruptedException {
         try {
             isRealAccount = Boolean.getBoolean(is_real);
-            IMainPage page = (IMainPage) this.getPage("MainPage");
-            page.clickOpenAccount(isRealAccount);
-            page.fillRegData(DataCreator.generateUserName(), DataCreator.generateUserEmail());
-            page.changePassword("Qwerty123", "Qwerty123");
+            this.mainPage.clickOpenAccount(isRealAccount);
+            this.mainPage.fillRegData(DataCreator.generateUserName(), DataCreator.generateUserEmail());
+            this.mainPage.changePassword("Qwerty123", "Qwerty123");
+            this.tradePage.verifyElementsOnPage();
         } catch (Exception e) {
             errorProcessor.processError(e);
         }
     }
 
-    @Test(description = "вход в кабинет")
+    @Test(description = "вход пользователя в кабинет")
     @Parameters({"user_name"})
-    public void loginUser(String user_name) {
+    public void loginUser(String user_name) throws InterruptedException {
+        try {
+            userName = user_name;
+            this.mainPage.loginUser(userName, "Qwerty123");
+            this.tradePage.verifyElementsOnPage();
+        } catch (Exception e) {
+            errorProcessor.processError(e);
+        }
+
 
     }
 

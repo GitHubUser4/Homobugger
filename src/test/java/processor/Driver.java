@@ -4,12 +4,9 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.ScreenOrientation;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
@@ -23,8 +20,7 @@ public class Driver {
     private static String platformName;
     private static String platformVersion;
     private static String avdName;
-    private static String pathToApp = "/Users/administrator/Downloads/hotoption.app";
-    //static String pathToApp = "/Users/administrator/Downloads/app-dev-debug.apk";
+    private static String pathToApp;
     private static AppiumDriver driver;
     private String command;
     private CommandLineExecutor commandLineExecutor = new CommandLineExecutor();
@@ -60,14 +56,15 @@ public class Driver {
 
 
     @BeforeSuite //перед каждыйм набором тестов
-    @Parameters({"platform_name", "platform_version", "avd_name"})
-    public void runAppiumServer(String platform_name, String platform_version, String avd_name) throws InterruptedException {
+    @Parameters({"platform_name", "platform_version", "avd_name", "path_to_app"})
+    public void runAppiumServer(String platform_name, String platform_version, String avd_name, String path_to_app) throws InterruptedException {
         log.info("----------------------------------------------------");
         log.info("New test suite started");
         log.info("Create Appium server startup string");
         platformName = platform_name;
         platformVersion = platform_version;
         avdName = avd_name;
+        pathToApp = path_to_app;
         if (platformName.equals("Android"))
             command = "appium -a 127.0.0.1 -p 4723 --automation-name Appium --platform-name " + platformName +
                     " --platform-version " + platformVersion + " --app " + pathToApp +

@@ -1,13 +1,9 @@
 package pages.Android;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
 import pages.IMainPage;
 import pages.PageAbstract;
 import processor.ErrorProcessor;
-
-import java.net.MalformedURLException;
 
 /**
  * Created by Popov S. on 14.10.16.
@@ -50,6 +46,22 @@ public class MainPage extends PageAbstract implements IMainPage {
         }
 
     }
+
+    public void loginUser(String userName, String userPassword) throws InterruptedException {
+        try {
+            this.getDriver().findElement(By.id("start_sign_in_button")).click();
+            this.getDriver().findElement(By.id("login_email_edit_text")).sendKeys(userName);
+            this.getDriver().hideKeyboard();
+            this.getDriver().findElement(By.id("login_pass_edit_text")).sendKeys(userPassword);
+            this.getDriver().hideKeyboard();
+            this.getDriver().findElement(By.id("login_next_button")).click();
+
+        } catch (Exception e) {
+            errorProcessor.processError(e);
+        }
+
+    }
+
 
 
 

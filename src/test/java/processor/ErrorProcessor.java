@@ -11,7 +11,7 @@ import java.io.StringWriter;
  */
 public class ErrorProcessor extends Exception {
     private static final Logger log = Logger.getLogger(ErrorProcessor.class);
-    private Driver driver = new Driver();
+    private Driver driver;
 
     public ErrorProcessor() {
         super();
@@ -22,7 +22,8 @@ public class ErrorProcessor extends Exception {
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
         log.error(sw.toString());
-        driver.closeAppiumServer();
+        driver = new Driver();
+        this.driver.closeAppiumServer();
     }
 
 }

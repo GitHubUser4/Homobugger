@@ -3,6 +3,7 @@
     <parameter name="platform_name" value="Android"/>
     <parameter name="platform_version" value="5.0.1"/>
     <parameter name="avd_name" value="Android_5.x"/>
+    <parameter name="path_to_app" value="/Users/administrator/Downloads/app-dev-debug.apk"/>
 
     <test name="RegDemoAccount">
         <parameter name="is_real" value="false"/>
@@ -10,10 +11,36 @@
             <class name="processor.Driver"/>
             <class name="processor.Tests">
                 <methods>
-                    <include name ="regDemo"/>
+                    <include name="regAccount"/>
                 </methods>
             </class>
         </classes>
     </test>
+
+    <test name="RegRealAccount">
+        <parameter name="is_real" value="true"/>
+        <classes>
+            <class name="processor.Driver"/>
+            <class name="processor.Tests">
+                <methods>
+                    <include name="regAccount"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="LoginUser">
+        <parameter name="user_name" value="hotopandroid@mailinator.com"/>
+        <classes>
+            <class name="processor.Driver"/>
+            <class name="processor.Tests">
+                <methods>
+                    <include name="loginUser"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 
 </suite>
