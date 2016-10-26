@@ -8,40 +8,49 @@ import pages.IMainPage;
 import java.net.MalformedURLException;
 
 /**
- * Created by macbook on 14.10.16.
+ * Created by Popov S. on 14.10.16.
  */
 public class Tests {
-
     String userName;
-    Boolean isRealAccount;
+    private ErrorProcessor errorProcessor = new ErrorProcessor();
+    private Boolean isRealAccount;
 
 
-    @Test(description = "регистрация демо счета")
+    @Test(description = "регистрация нового счета")
     @Parameters({"is_real"})
-    public void regAccount(String is_real) throws MalformedURLException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        isRealAccount = Boolean.getBoolean(is_real);
-        IMainPage page = (IMainPage) this.getPage("MainPage");
-        page.clickOpenAccount(isRealAccount);
-        page.fillRegData("Vasya", "pupko@mailinator.com");
-        page.changePassword("Qwerty123", "Qwerty123");
+    public void regAccount(String is_real) throws InterruptedException {
+        try {
+            isRealAccount = Boolean.getBoolean(is_real);
+            IMainPage page = (IMainPage) this.getPage("MainPage");
+            page.clickOpenAccount(isRealAccount);
+            page.fillRegData(DataCreator.generateUserName(), DataCreator.generateUserEmail());
+            page.changePassword("Qwerty123", "Qwerty123");
+        } catch (Exception e) {
+            errorProcessor.processError(e);
+        }
     }
 
     @Test(description = "вход в кабинет")
-    public void regRa() {
+    @Parameters({"user_name"})
+    public void loginUser(String user_name) {
 
     }
 
 
-    private Object getPage(String name) throws MalformedURLException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private Object getPage(String name) throws InterruptedException {
         String type;
-        if (Driver.getDriver() instanceof AndroidDriver) {
-            type = "Android";
-        } else {
-            type = "IOS";
+        try {
+            if (Driver.getDriver() instanceof AndroidDriver) {
+                type = "Android";
+            } else {
+                type = "IOS";
+            }
+            Object obj = Class.forName("pages." + type + "." + name).newInstance();
+
+            return obj;
+        } catch (Exception e) {
+            errorProcessor.processError(e);
+            return null;
         }
-
-        Object obj = Class.forName("pages." + type + "." + name).newInstance();
-
-        return obj;
     }
 }

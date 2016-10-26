@@ -24,10 +24,8 @@
                 <version>2.19.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <!--
-                                                <suiteXmlFile>src/test/resources/iOS_smoke.xml</suiteXmlFile>
-                        -->
-                        <suiteXmlFile>src/test/resources/temp.xml</suiteXmlFile>
+                        <!--                        <suiteXmlFile>src/test/resources/testfiles/iOS_smoke.xml</suiteXmlFile>-->
+                        <suiteXmlFile>src/test/resources/testfiles/temp.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -72,6 +70,11 @@
             <version>2.53.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
 
         <!--<dependency>
             <groupId>org.seleniumhq.selenium</groupId>

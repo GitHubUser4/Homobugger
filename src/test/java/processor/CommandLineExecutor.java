@@ -1,35 +1,34 @@
 package processor;
 
+import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * Created by macbook on 14.10.16.
+ * Created by Popov S. on 14.10.16.
  */
 public class CommandLineExecutor {
-    String value;
+    private static final Logger log = Logger.getLogger(CommandLineExecutor.class);
+    private String commandLineString;
+    private ErrorProcessor errorProcessor = new ErrorProcessor();
 
-    public void executeCommand(String command, String startMessage) {
-        Process process;
+    void executeCommand(String command, String startMessage) throws InterruptedException {
+        log.info("Run Appium server - " + command);
         try {
-            System.out.println(command);
+            Process process;
             process = Runtime.getRuntime().exec(command);
-            //String[] strings = new String[] {"/bin/bash", "-c", command};
-            //process = new ProcessBuilder("appium", "-a 127.0.0.1","-p 4725").start();
             if (!startMessage.equals("")) {
                 BufferedReader reader =
                         new BufferedReader(new InputStreamReader(process.getInputStream()));
-                value = reader.readLine();
-                while (!value.contains(startMessage)) {
-                    System.out.println(value);
-                    value = reader.readLine();
+                commandLineString = reader.readLine();
+                while (!commandLineString.contains(startMessage)) {
+                    log.debug("Terminal: " + commandLineString);
+                    commandLineString = reader.readLine();
                 }
             }
-
-            } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            errorProcessor.processError(e);
         }
 
     }
-
 }
