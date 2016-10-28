@@ -5,17 +5,19 @@
     <parameter name="avd_name" value="Android_5.x"/>
     <parameter name="path_to_app" value="/Users/administrator/Downloads/app-dev-debug.apk"/>
 
-    <test name="RegDemoAccount">
-        <parameter name="is_real" value="false"/>
-        <classes>
-            <class name="processor.Driver"/>
-            <class name="processor.Tests">
-                <methods>
-                    <include name="regAccount"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+    <!--
+        <test name="RegDemoAccount">
+            <parameter name="is_real" value="false"/>
+            <classes>
+                <class name="processor.Driver"/>
+                <class name="processor.Tests">
+                    <methods>
+                        <include name="regAccount"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+    -->
 
     <!--<test name="RegRealAccount">
         <parameter name="is_real" value="true"/>
@@ -27,7 +29,7 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test> -->
 
 
     <test name="LoginUser">
@@ -40,7 +42,6 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
-
+    </test>
 
 </suite>

@@ -13,9 +13,14 @@ public class MainPage extends PageAbstract implements IMainPage {
     private ErrorProcessor errorProcessor = new ErrorProcessor();
 
     public void clickOpenAccount(boolean isReal) throws InterruptedException {
-        //if (isReal) this.getDriver().findElement(By.id("Open Real account")).click(); else
-        //this.getDriver().findElement(By.id("Demo account with $1,000")).click();
-        Thread.sleep(10000);
+
+        try {
+            if (isReal) this.getDriver().findElement(By.id("Open Real account")).click();
+            else
+                this.getDriver().findElement(By.id("Demo account with $1,000")).click();
+        } catch (Exception e) {
+            errorProcessor.processError(e);
+        }
     }
 
     public void fillRegData(String userName, String userEmail) throws InterruptedException {

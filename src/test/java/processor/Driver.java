@@ -75,6 +75,7 @@ public class Driver {
         this.commandLineExecutor.executeCommand(command, "Appium REST http interface listener started");
     }
 
+
     @AfterSuite
     public void closeAppiumServer() throws InterruptedException {
         log.info("Stop appium server");

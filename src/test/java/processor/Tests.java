@@ -1,6 +1,7 @@
 package processor;
 
 import io.appium.java_client.android.AndroidDriver;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.IMainPage;
@@ -17,6 +18,11 @@ public class Tests {
     private ITradePage tradePage;
 
     public Tests() throws InterruptedException {
+
+    }
+
+    @BeforeTest
+    private void createPages() throws InterruptedException {
         mainPage = (IMainPage) this.getPage("MainPage");
         tradePage = (ITradePage) this.getPage("TradePage");
     }
@@ -45,12 +51,10 @@ public class Tests {
         } catch (Exception e) {
             errorProcessor.processError(e);
         }
-
-
     }
 
 
-    private Object getPage(String name) throws InterruptedException {
+    public Object getPage(String name) throws InterruptedException {
         String type;
         try {
             if (Driver.getDriver() instanceof AndroidDriver) {
