@@ -34,7 +34,7 @@ public class Tests {
             isRealAccount = Boolean.getBoolean(is_real);
             this.mainPage.clickOpenAccount(isRealAccount);
             this.mainPage.fillRegData(DataCreator.generateUserName(), DataCreator.generateUserEmail());
-            this.mainPage.changePassword("Qwerty123", "Qwerty123");
+            this.mainPage.changePassword("123Qwerty", "123Qwerty");
             this.tradePage.verifyElementsOnPage();
         } catch (Exception e) {
             errorProcessor.processError(e);

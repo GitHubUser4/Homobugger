@@ -44,6 +44,7 @@ public class Driver {
                     capabilities.setCapability("fullReset", "true");
                     capabilities.setCapability("newCommandTimeout", 7200);
                     capabilities.setCapability("automationName", "Appium");
+                    capabilities.setCapability("autoAcceptAlerts", "true");
                     driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 }
                 driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
