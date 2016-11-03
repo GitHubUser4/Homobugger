@@ -1,5 +1,6 @@
 package pages.Android;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import pages.ITradePage;
 import pages.PageAbstract;
@@ -9,10 +10,12 @@ import processor.ErrorProcessor;
  * Created by administrator on 26.10.16.
  */
 public class TradePage extends PageAbstract implements ITradePage {
+    private static final Logger log = Logger.getLogger(TradePage.class);
     private ErrorProcessor errorProcessor = new ErrorProcessor();
 
     @Override
     public void verifyElementsOnPage() throws InterruptedException {
+        log.info("Try to verify elements on trade page");
         try {
             this.getDriver().findElement(By.id("bar_create_real_account_button")).isDisplayed();
             this.getDriver().findElement(By.id("bar_balance_text_view")).isDisplayed();

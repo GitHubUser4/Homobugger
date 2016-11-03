@@ -1,6 +1,7 @@
 package processor;
 
 import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -13,7 +14,7 @@ public class CommandLineExecutor {
     private ErrorProcessor errorProcessor = new ErrorProcessor();
 
     void executeCommand(String command, String startMessage) throws InterruptedException {
-        log.info("Run Appium server - " + command);
+        log.info("Run command - " + command);
         try {
             Process process;
             process = Runtime.getRuntime().exec(command);

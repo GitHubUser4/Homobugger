@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<suite name="Android_5.x" verbose="10">
-    <parameter name="platform_name" value="Android"/>
-    <parameter name="platform_version" value="5.0.1"/>
-    <parameter name="avd_name" value="Android_5.x"/>
-    <parameter name="path_to_app" value="/Users/administrator/Downloads/app-dev-debug.apk"/>
-
-    <test name="RegDemoAccount">
-        <parameter name="is_real" value="false"/>
-        <classes>
-            <class name="processor.Driver"/>
-            <class name="processor.Tests">
-                <methods>
-                    <include name="regAccount"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<suite name="iOS_9.x" verbose="10">
+    <parameter name="platform_name" value="iOS"/>
+    <parameter name="platform_version" value="9.3"/>
+    <parameter name="avd_name" value="iPhone 6"/>
+    <parameter name="path_to_app" value="/Users/administrator/Downloads/hotoption.app"/>
 
     <test name="RegRealAccount">
         <parameter name="is_real" value="true"/>
@@ -29,8 +17,20 @@
         </classes>
     </test>
 
+    <test name="RegDemoAccount">
+        <parameter name="is_real" value="false"/>
+        <classes>
+            <class name="processor.Driver"/>
+            <class name="processor.Tests">
+                <methods>
+                    <include name="regAccount"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="LoginUser">
-        <parameter name="user_name" value="hotopandroid@mailinator.com"/>
+        <parameter name="user_name" value="hotopios@mailinator.com"/>
         <classes>
             <class name="processor.Driver"/>
             <class name="processor.Tests">

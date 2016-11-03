@@ -24,8 +24,8 @@
                 <version>2.19.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <!--                        <suiteXmlFile>src/test/resources/testfiles/iOS_smoke.xml</suiteXmlFile>-->
-                        <suiteXmlFile>src/test/resources/testfiles/temp.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testfiles/IOS_smoke.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testfiles/Android_smoke.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -42,7 +42,6 @@
 
         </plugins>
     </build>
-
 
 
     <dependencies>

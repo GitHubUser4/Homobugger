@@ -1,6 +1,7 @@
 package processor;
 
 import io.appium.java_client.android.AndroidDriver;
+import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -11,12 +12,12 @@ import pages.ITradePage;
  * Created by Popov S. on 14.10.16.
  */
 public class Tests {
+    private static final Logger log = Logger.getLogger(Tests.class);
     private String userName;
     private ErrorProcessor errorProcessor = new ErrorProcessor();
     private Boolean isRealAccount;
     private IMainPage mainPage;
     private ITradePage tradePage;
-
     public Tests() throws InterruptedException {
 
     }
@@ -30,28 +31,23 @@ public class Tests {
     @Test(description = "регистрация нового счета")
     @Parameters({"is_real"})
     public void regAccount(String is_real) throws InterruptedException {
-        try {
+        log.info("Run registration test, account type is_real - " + is_real);
             isRealAccount = Boolean.getBoolean(is_real);
             this.mainPage.clickOpenAccount(isRealAccount);
             this.mainPage.fillRegData(DataCreator.generateUserName(), DataCreator.generateUserEmail());
             this.mainPage.changePassword("123Qwerty", "123Qwerty");
             this.tradePage.verifyElementsOnPage();
-        } catch (Exception e) {
-            errorProcessor.processError(e);
-        }
+
     }
 
     @Test(description = "вход пользователя в кабинет")
     @Parameters({"user_name"})
     public void loginUser(String user_name) throws InterruptedException {
-        try {
+        log.info("Run login test for user - " + user_name);
             userName = user_name;
             this.mainPage.loginUser(userName, "Qwerty123");
             this.tradePage.verifyElementsOnPage();
-        } catch (Exception e) {
-            errorProcessor.processError(e);
         }
-    }
 
 
     public Object getPage(String name) throws InterruptedException {

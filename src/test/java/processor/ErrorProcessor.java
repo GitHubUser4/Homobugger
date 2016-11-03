@@ -23,7 +23,7 @@ public class ErrorProcessor extends Exception {
         e.printStackTrace(pw);
         log.error(sw.toString());
         driver = new Driver();
-        this.driver.closeAppiumServer();
+        this.driver.closeSimulator();
     }
 
 }
